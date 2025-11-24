@@ -1,4 +1,4 @@
-repos:
+repos: #repo dos hooks terraform, como o fmt, usado para reformatar automaticamente os arquivos de configuração
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.103.0
     hooks:
@@ -6,4 +6,7 @@ repos:
         args:
           - --args=-recursive
       - id: terraform_validate
+      - id: terraform_docs
+        args:
+          - --args=--output-file README.md #Passando esse argumento, ele sempre vai atualizar o README do projeto, serve para o caso de você incluir novos módulos ou recursos, e a doc continuar sendo exposta corretamente
      
