@@ -1,3 +1,54 @@
+# Super Módulo EKS — Deploy completo, modular e lindão ✨
+
+Este repositório contém um **Super Módulo Terraform** criado para provisionar um ambiente completo de **Amazon EKS**, desde a **rede** até o **node group**, passando pelo **cluster** e pelo **AWS Load Balancer Controller**.  
+A ideia é simples: **você escreve pouco, o Terraform faz muito.**
+
+Este projeto está dividido em **4 submódulos**, cada um responsável por uma parte essencial do EKS:
+
+### 🧩 Submódulos inclusos
+- **network** → Cria tudo que a base precisa: VPC, subnets públicas/privadas, route tables, etc.  
+- **cluster** → Provisiona o EKS em si, configura o OIDC, roles, policies e toda a mágica do controle.  
+- **managed-node-group** → Sobe o node group gerenciado pela AWS (com IAM, escalonamento, labels, taints, tudo pronto).  
+- **aws-load-balancer-controller** → Instala via Helm o ALB Controller, permitindo Ingress e balanceamento automágico.  
+
+Juntos, eles formam um módulo completo e reutilizável para criar um EKS **100% funcional, organizado e extensível**, perfeito para estudos, PoCs ou produção (com ajustes mínimos).
+
+---
+
+## 🔁 Como reutilizar este Super Módulo
+
+Se você quiser usar este repositório diretamente no seu projeto, basta apontar o `source` para ele.  
+Exemplo usando o GitHub:
+
+```hcl
+module "eks" {
+  source = "https://github.com/Giovanna-Azzolini/projetoEKS.git"
+
+  # aqui você passa os inputs necessários, por exemplo:
+  project_name = "meu-eks"
+  region       = "us-east-1"
+  cidr_block   = "10.0.0.0/16"
+  tags = {
+    owner = "voce"
+  }
+}
+```
+
+Depois é só rodar:
+
+```bash
+terraform init
+terraform apply
+```
+
+E pronto: seu cluster EKS estará sendo criado bonitinho.  
+Sem precisar baixar o código, sem mistério.
+
+---
+
+Abaixo está a documentação gerada automaticamente pelo `terraform-docs`, com detalhes completos dos inputs, outputs e módulos do projeto:
+
+
 # projetoEKS
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
