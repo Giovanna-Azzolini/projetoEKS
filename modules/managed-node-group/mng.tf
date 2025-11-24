@@ -13,6 +13,11 @@ resource "aws_eks_node_group" "eks_managed_node_group" {
     }
   )
 
+  launch_template {
+    id      = aws_launch_template.node_lt.id
+    version = "$Latest"
+  }
+
   scaling_config {
     desired_size = 1
     max_size     = 1
