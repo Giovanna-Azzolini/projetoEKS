@@ -46,7 +46,7 @@ jobs:
             --out-file infracost.json
 
       - name: Post Infracost comment
-        uses: infracost/actions/comment@v3
+        uses: infracost/actions/comment@v1
         with:
           path: infracost.json
           behavior: update
